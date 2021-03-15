@@ -1,0 +1,51 @@
+pipeline {
+    agent {
+        label 'master'
+    }
+    tools {
+        jdk 'jdk8'
+        maven 'm3'
+    }
+    stages {
+        stage('1/7-Checkout SCM'){
+            steps {
+                sh 'echo "========> Checking Out Codebase ========>'
+                git branch: 'feature/trial1',
+                    url: 'ssh://git@github.com:bobbybabu007/devopsproject1.git',
+                //    credentialsId: 'my-git-ssh-creds'
+                //git 'https://github.com/bobbybabu007/devopsproject1.git'
+            }
+        }
+        
+        stage('2/7-Building App FrontEnd'){
+            steps {
+                sh 'echo "========> Building App FrontEnd ========>'
+                sh 'npm install'
+                sh 'npm build'            
+                }
+        }
+        
+        stage('3/7-Building App BackEnd'){
+            steps {
+                sh 'echo "========> Building App BackEnd ========>'
+                sh 'mvn clean package'
+                archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false           
+                }
+        }
+        
+        stage('4/7-Building Docker Image'){
+            steps {
+                sh 'echo "========> Building Docker Image ========>'
+                sh 'docker image build --no-cache -t custombox$:env.BUILD_ID'
+                }
+                // https://www.jenkins.io/doc/book/pipeline/docker/
+        
+        stage('5/7-Publishing Docker Image'){
+            steps {
+                sh 'echo "========> Publishing Docker Image ========>'
+                sh 'docker image tag custombox$:env.BUILD_ID bobbybabu007/openjdk8-custom'
+                archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false           
+                }        
+        }           
+    }
+}
