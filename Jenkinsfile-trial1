@@ -1,12 +1,12 @@
-pipeline {
-    agent {
+pipeline{
+    agent{
         label 'master'
     }
-    tools {
+    tools{
         jdk 'jdk8'
         maven 'm3'
     }
-    stages {
+    stages{
         stage('1/7-Checkout SCM'){
             steps {
                 sh 'echo "========> Checking Out Codebase ========>'
@@ -42,8 +42,8 @@ pipeline {
             steps {
                 sh 'echo "========> Publishing Docker Image ========>'
                 sh 'docker image tag custombox$:env.BUILD_ID bobbybabu007/openjdk8-custom'
-                archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false           
-                }        
+                archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false         
+            }        
         }           
     }
 }
