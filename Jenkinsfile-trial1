@@ -3,8 +3,8 @@ pipeline{
         label 'master'
     }
     tools{
-        jdk 'jdk8'
-        maven 'm3'
+        jdk 'java11'
+        maven 'maven'
     }
     stages{
         stage('1/7-Checkout SCM'){
