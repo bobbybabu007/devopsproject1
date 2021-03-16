@@ -11,9 +11,7 @@ pipeline {
             steps {
                 sh 'echo "========> Checking Out Codebase ========>'
                 git branch: 'feature/trial1',
-                    url: 'ssh://git@github.com:bobbybabu007/devopsproject1.git',
-                //    credentialsId: 'my-git-ssh-creds'
-                //git 'https://github.com/bobbybabu007/devopsproject1.git'
+                    url: 'ssh://git@github.com:bobbybabu007/devopsproject1.git'
             }
         }
         
