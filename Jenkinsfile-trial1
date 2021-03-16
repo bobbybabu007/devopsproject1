@@ -28,7 +28,7 @@ pipeline{
                 sh 'echo "========> Building App BackEnd ========>'
                 sh 'mvn clean package'
                 archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false           
-                }
+            }
         }
         
         stage('4/7-Building Docker Image'){
@@ -37,12 +37,13 @@ pipeline{
                 sh 'docker image build --no-cache -t custombox$:env.BUILD_ID'
                 }
                 // https://www.jenkins.io/doc/book/pipeline/docker/
-        
+        }
+
         stage('5/7-Publishing Docker Image'){
             steps {
                 sh 'echo "========> Publishing Docker Image ========>'
                 sh 'docker image tag custombox$:env.BUILD_ID bobbybabu007/openjdk8-custom'
-                // archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false         
+                archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false         
             }        
         }           
     }
