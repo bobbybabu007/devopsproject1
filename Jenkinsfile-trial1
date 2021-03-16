@@ -42,7 +42,7 @@ pipeline{
             steps {
                 sh 'echo "========> Publishing Docker Image ========>'
                 sh 'docker image tag custombox$:env.BUILD_ID bobbybabu007/openjdk8-custom'
-                archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false         
+                // archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false         
             }        
         }           
     }
