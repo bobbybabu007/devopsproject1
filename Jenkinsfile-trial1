@@ -10,8 +10,7 @@ pipeline{
         stage('1/7-Checkout SCM'){
             steps {
                 sh 'echo "========> Checking Out Codebase ========>'
-                git branch: 'feature/trial1',
-                    url: 'ssh://git@github.com:bobbybabu007/devopsproject1.git'
+                checkout scm
             }
         }
         
