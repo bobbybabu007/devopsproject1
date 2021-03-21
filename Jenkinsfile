@@ -9,7 +9,7 @@ pipeline{
     stages{
         stage('Checkout SCM'){
             steps{
-                checkout scm
+                git 'https://github.com/rahuldevops1/devopsproject1-1.git'
             }
         }
         stage('Build FrontEnd'){
