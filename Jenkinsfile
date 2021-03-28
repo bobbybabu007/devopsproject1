@@ -2,10 +2,6 @@ pipeline{
     agent {
         label 'master'
     }
-    tools {
-       jdk 'jdk8'
-       maven 'm3'
-    }
     stages{
         stage('Checkout SCM'){
             steps{
