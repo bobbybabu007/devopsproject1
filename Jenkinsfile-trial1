@@ -3,7 +3,7 @@ pipeline{
         label 'master'
     }
     tools{
-        jdk 'java11'
+        jdk 'java'
         maven 'maven'
     }
     stages{
