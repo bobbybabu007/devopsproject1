@@ -5,6 +5,10 @@ pipeline{
     tools{
         jdk 'java'
         maven 'maven'
+        nodejs 'npm'
+        gradle 'gradle'
+        dockerTool 'docker'
+        
     }
     stages{
         stage('1/7-Checkout SCM'){
