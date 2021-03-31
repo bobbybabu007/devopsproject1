@@ -9,14 +9,14 @@ pipeline{
     stages{
         stage('1/7-Checkout SCM'){
             steps {
-                sh 'echo "========> Checking Out Codebase ========>'
+                sh 'echo "========> Checking Out Codebase ========>"'
                 checkout scm
             }
         }
         
         stage('2/7-Building App FrontEnd'){
             steps {
-                sh 'echo "========> Building App FrontEnd ========>'
+                sh 'echo "========> Building App FrontEnd ========>"'
                 sh 'npm install'
                 sh 'npm build'            
                 }
@@ -24,7 +24,7 @@ pipeline{
         
         stage('3/7-Building App BackEnd'){
             steps {
-                sh 'echo "========> Building App BackEnd ========>'
+                sh 'echo "========> Building App BackEnd ========>"'
                 sh 'mvn clean package'
                 archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false           
             }
@@ -32,7 +32,7 @@ pipeline{
         
         stage('4/7-Building Docker Image'){
             steps {
-                sh 'echo "========> Building Docker Image ========>'
+                sh 'echo "========> Building Docker Image ========>"'
                 sh 'docker image build --no-cache -t custombox$:env.BUILD_ID'
                 }
                 // https://www.jenkins.io/doc/book/pipeline/docker/
@@ -40,8 +40,8 @@ pipeline{
 
         stage('5/7-Publishing Docker Image'){
             steps {
-                sh 'echo "========> Publishing Docker Image ========>'
-                sh 'docker image tag custombox$:env.BUILD_ID bobbybabu007/openjdk8-custom'
+                sh 'echo "========> Publishing Docker Image ========>"'
+                sh 'docker image tag custombox$:env.BUILD_ID bobbybabu007/project1:v1'
                 archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false         
             }        
         }           
